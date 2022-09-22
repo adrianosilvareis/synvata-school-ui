@@ -14,7 +14,7 @@ export class CoursesService {
   constructor(private httpClient: HttpClient) { }
 
   list() {
-    return this.httpClient.get<Course[]>(this.API).pipe(first())
+    return this.httpClient.get<Course[]>(this.API)
   }
 
   save(record: Partial<Course>) {
@@ -25,14 +25,18 @@ export class CoursesService {
   }
 
   loadById(id: string) {
-    return this.httpClient.get<Course>(`${this.API}/${id}`)
+    return this.httpClient.get<Course>(`${this.API}/${id}`);
+  }
+
+  deleteById(id: string) {
+    return this.httpClient.delete<Course>(`${this.API}/${id}`);
   }
 
   private create(record: Partial<Course>) {
-    return this.httpClient.post<Course>(this.API, record)
+    return this.httpClient.post<Course>(this.API, record);
   }
 
   private update(record: Partial<Course>) {
-    return this.httpClient.put<Course>(`${this.API}/${record.id}`, record)
+    return this.httpClient.put<Course>(`${this.API}/${record.id}`, record);
   }
 }

@@ -21,7 +21,7 @@
       </button>
 
       <button mat-icon-button color="warn" aria-label="Delete this course" title="Delete this course">
-        <mat-icon>delete</mat-icon>
+        <mat-icon (click)="onDelete(course)">delete</mat-icon>
       </button>
     </mat-cell>
   </ng-container>
