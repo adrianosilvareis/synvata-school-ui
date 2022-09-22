@@ -7,13 +7,13 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef="" class="action-column-header">
       <button mat-mini-fab color="primary" aria-label="Courses" title="Add new course">
-        <mat-icon aroa-hidden="false" aria-label="Courses" (click)="onAdd()">add</mat-icon>
+        <mat-icon (click)="onAdd()">add</mat-icon>
       </button>
     </mat-header-cell>
 
     <mat-cell *matCellDef="let course" class="action-column">
       <button mat-icon-button color="primary" aria-label="Edit this course" title="Edit this course">
-        <mat-icon>edit</mat-icon>
+        <mat-icon (click)="onEdit(course)">edit</mat-icon>
       </button>
 
       <button mat-icon-button color="secondary" aria-label="Students" title="Students of this course">
