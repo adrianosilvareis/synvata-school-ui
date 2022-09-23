@@ -17,7 +17,7 @@
       </button>
 
       <button mat-icon-button color="secondary" aria-label="Students" title="Students of this course">
-        <mat-icon aroa-hidden="false" aria-label="Students">school</mat-icon>
+        <mat-icon (click)="onStudents(course)">school</mat-icon>
       </button>
 
       <button mat-icon-button color="warn" aria-label="Delete this course" title="Delete this course">

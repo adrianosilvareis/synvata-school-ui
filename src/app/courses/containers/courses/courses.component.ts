@@ -39,6 +39,10 @@ export class CoursesComponent implements OnInit {
     this.router.navigate(['edit', course.id], { relativeTo: this.route })
   }
 
+  goStudents(course: Course) {
+    this.router.navigate([`${course.id}/students`], { relativeTo: this.route })
+  }
+
   onConfirmDelete(course: Course) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: `Are you sure you want to delete course '${course.name}'?`,
