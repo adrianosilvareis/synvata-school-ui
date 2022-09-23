@@ -13,7 +13,6 @@ export class StudentListComponent implements OnInit {
   @Output() add = new EventEmitter();
   @Output() edit = new EventEmitter();
   @Output() delete = new EventEmitter();
-  @Output() unsubscribe = new EventEmitter();
 
   readonly displayedColumns = ['name', 'email', 'actions']
 
@@ -32,9 +31,5 @@ export class StudentListComponent implements OnInit {
 
   onDelete(student: Student) {
     this.delete.emit(student);
-  }
-
-  onUnsubscribe(student: Student) {
-    this.unsubscribe.emit(student);
   }
 }

@@ -55,10 +55,14 @@ export class StudentsComponent implements OnInit {
       })
   }
 
-  loadList(course?: Partial<Course>) {
-    if (course && course.id) {
+  filterByCourse(course: Course) {
+    this.students$ = this.loadList(course.id)
+  }
+
+  loadList(courseId?: string) {
+    if (courseId) {
       return this.service
-        .listByCourseId(course.id)
+        .listByCourseId(courseId)
         .pipe(catchError(_ => {
           this.onError('Error loading students.');
           return of([])
@@ -104,6 +108,7 @@ export class StudentsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(resolve => {
       this.courseId = resolve['courseId']
+      this.students$ = this.loadList(this.courseId)
     })
   }
 }

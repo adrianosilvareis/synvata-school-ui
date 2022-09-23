@@ -7,7 +7,7 @@
       *ngIf="options$ | async as options"
       [modelValue]="courseId"
       [options]="options"
-      (filter)="loadList($event)"
+      (filter)="filterByCourse($event)"
       [title]="'Course'"
     ></app-search-filter>
   </mat-toolbar>

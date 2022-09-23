@@ -21,15 +21,9 @@
         <mat-icon (click)="onEdit(student)">edit</mat-icon>
       </button>
 
-      <button mat-icon-button color="warn" title="Unsubscribe from this course" *ngIf="courseId; else remove">
-        <mat-icon (click)="onUnsubscribe(student)">cancel</mat-icon>
+      <button mat-icon-button color="warn" title="Delete this student">
+        <mat-icon (click)="onDelete(student)">delete</mat-icon>
       </button>
-
-      <ng-template #remove>
-        <button mat-icon-button color="warn" title="Delete this student">
-          <mat-icon (click)="onDelete(student)">delete</mat-icon>
-        </button>
-      </ng-template>
     </mat-cell>
   </ng-container>
 

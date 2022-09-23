@@ -1,8 +1,11 @@
+import { Observable, of } from 'rxjs';
+import { CoursesService } from './../../../courses/services/courses.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Course } from 'src/app/courses/model/course';
 import { StudentsService } from 'src/app/students/services/students.service';
 
 @Component({
@@ -15,12 +18,17 @@ export class StudentFormComponent implements OnInit {
   form = this.formBuilder.group({
     id: new FormControl('', { nonNullable:true }),
     name: new FormControl('', { nonNullable:true }),
-    email: new FormControl('', { nonNullable:true })
+    email: new FormControl('', { nonNullable:true }),
+    courses: new FormControl<Course[]>([], { nonNullable:true }),
   })
+
+  courses: Course[] = [];
+  allCourses$: Observable<Course[]> = of([]);
 
   constructor(
     private formBuilder: FormBuilder,
     private service: StudentsService,
+    private coursesService: CoursesService,
     private _snackBar: MatSnackBar,
     private location: Location,
     private route: ActivatedRoute
@@ -49,12 +57,28 @@ export class StudentFormComponent implements OnInit {
       this.form.setValue({
         id: student.id,
         name: student.name,
-        email: student.email
+        email: student.email,
+        courses: student.courses
       })
+      this.courses = student.courses;
     })
   }
 
+  private loadCourses() {
+    this.allCourses$ = this.coursesService.list();
+  }
+
+  onUpdate(courses: Course[]) {
+    this.form.get('courses')?.setValue(courses)
+    this.courses = courses;
+  }
+
   ngOnInit(): void {
-    this.route.params.subscribe(({id}) => this.loadById(id))
+    this.route.params.subscribe(({id}) => {
+      if (id) {
+        this.loadById(id)
+      }
+    })
+    this.loadCourses()
   }
 }

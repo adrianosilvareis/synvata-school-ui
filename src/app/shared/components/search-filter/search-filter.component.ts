@@ -25,10 +25,15 @@ export class SearchFilterComponent implements OnInit{
   myControl = new FormControl<string | Display>('');
   filteredOptions: Observable<Display[]>;
 
+  private prevent = false;
+
   constructor() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => {
+        if (!value && this.prevent) {
+          this.filter.emit()
+        }
         const name = typeof value === 'string' ? value : value?.name;
         return name ? this._filter(name as string) : this.options.slice();
       }),
@@ -46,6 +51,7 @@ export class SearchFilterComponent implements OnInit{
 
   onSelect() {
     this.filter.emit(this.myControl.value)
+    this.prevent = true
   }
 
   ngOnInit(): void {

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { filter, map } from 'rxjs';
 
 import { Student } from '../model/student';
 
@@ -17,7 +18,11 @@ export class StudentsService {
   }
 
   listByCourseId(courseId: string) {
-    return this.httpClient.get<Student[]>(this.API)
+    return this.httpClient.get<Student[]>(this.API).pipe(map(students => {
+      return students.filter(student => {
+        return student.courses.some(course => course.id == courseId)
+      })
+    }))
   }
 
   loadById(id: string) {

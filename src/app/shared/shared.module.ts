@@ -6,6 +6,7 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MultiselectChipsComponent } from './components/multiselect-chips/multiselect-chips.component';
 
 
 
@@ -13,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     ErrorDialogComponent,
     ConfirmationDialogComponent,
-    SearchFilterComponent
+    SearchFilterComponent,
+    MultiselectChipsComponent
   ],
   imports: [
     AppMaterialModule,
@@ -23,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports:[
     ErrorDialogComponent,
     ConfirmationDialogComponent,
-    SearchFilterComponent
+    SearchFilterComponent,
+    MultiselectChipsComponent
   ]
 })
 export class SharedModule { }

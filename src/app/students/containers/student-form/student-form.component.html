@@ -10,6 +10,14 @@
       <mat-form-field class="full-width">
         <input matInput placeholder="Email" formControlName="email">
       </mat-form-field>
+
+      <app-multiselect-chips
+        *ngIf="allCourses$ | async let allCourses"
+        [chips]="courses"
+        (update)="onUpdate($event)"
+        [allChips]="allCourses"
+        [title]="'Courses'"
+      ></app-multiselect-chips>
     </form>
   </mat-card-content>
 
