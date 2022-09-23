@@ -18,6 +18,9 @@
       *ngIf="students$ | async as students; else loading"
       [courseId]="courseId"
       [students]="students"
+      (add)="onAdd()"
+      (edit)="onEdit($event)"
+      (delete)="onConfirmDelete($event)"
     ></app-student-list>
 
     <ng-template #loading>

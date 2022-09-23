@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { catchError, map, Observable, of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, Observable, of } from 'rxjs';
 import { CoursesService } from 'src/app/courses/services/courses.service';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
 import { Student } from '../../model/student';
@@ -22,12 +24,35 @@ export class StudentsComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
+    private router: Router,
     private route: ActivatedRoute,
     private service: StudentsService,
-    private courseService: CoursesService
+    private courseService: CoursesService,
+    private _snackBar: MatSnackBar,
   ) {
     this.students$ = this.loadList()
     this.options$ = this.loadCoursesOptions()
+  }
+
+  onAdd(){
+    this.router.navigate(['students/new'])
+  }
+
+  onEdit(student: Student) {
+    this.router.navigate(['students/edit', student.id])
+  }
+
+  onConfirmDelete(student: Student) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: `Are you sure you want to delete student '${student.name}'?`,
+    });
+
+    const response = dialogRef.afterClosed()
+      .subscribe(response => {
+        if (response) {
+          this.deleteById(student.id)
+        }
+      })
   }
 
   loadList(course?: Partial<Course>) {
@@ -54,6 +79,20 @@ export class StudentsComponent implements OnInit {
         this.onError('Error loading students.');
         return of([])
       }))
+  }
+
+  private deleteById(id: string) {
+    this.service.deleteById(id)
+    .pipe(catchError(_ => {
+      this.onError('Error on delete student.');
+      return of(false)
+    }))
+    .subscribe(response => {
+      if (response) {
+        this._snackBar.open("Deleted student with success", '', { duration: 5000 })
+        this.students$ = this.loadList()
+      }
+    })
   }
 
   private onError(errorMsg: string) {

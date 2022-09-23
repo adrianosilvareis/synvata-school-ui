@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Student } from '../model/student';
 
 @Injectable({
@@ -17,5 +18,28 @@ export class StudentsService {
 
   listByCourseId(courseId: string) {
     return this.httpClient.get<Student[]>(this.API)
+  }
+
+  loadById(id: string) {
+    return this.httpClient.get<Student>(`${this.API}/${id}`);
+  }
+
+  save(record: Partial<Student>) {
+    if (record.id) {
+      return this.update(record);
+    }
+    return this.create(record);
+  }
+
+  deleteById(id: string) {
+    return this.httpClient.delete<Student>(`${this.API}/${id}`);
+  }
+
+  private create(record: Partial<Student>) {
+    return this.httpClient.post<Student>(this.API, record);
+  }
+
+  private update(record: Partial<Student>) {
+    return this.httpClient.put<Student>(`${this.API}/${record.id}`, record);
   }
 }
