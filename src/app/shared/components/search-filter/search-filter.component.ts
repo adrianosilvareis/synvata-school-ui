@@ -17,6 +17,7 @@ export interface Display {
   styleUrls: ['./search-filter.component.scss']
 })
 export class SearchFilterComponent implements OnInit{
+  @Input() title: string = 'Filter';
   @Input() modelValue: string = '';
   @Input() options: Display[] = [];
   @Output() filter = new EventEmitter();
@@ -49,7 +50,7 @@ export class SearchFilterComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.modelValue) {
-      const option = this.options.find(option => option.id === this.modelValue) ?? ''
+      const option = this.options.find(option => option.id == this.modelValue) ?? ''
       this.myControl.setValue(option)
       this.myControl.disable()
     }
