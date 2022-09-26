@@ -18,11 +18,7 @@ export class StudentsService {
   }
 
   listByCourseId(courseId: string) {
-    return this.httpClient.get<Student[]>(this.API).pipe(map(students => {
-      return students.filter(student => {
-        return student.courses.some(course => course.id == courseId)
-      })
-    }))
+    return this.httpClient.get<Student[]>(`api/courses/${courseId}/students`)
   }
 
   loadById(id: string) {
