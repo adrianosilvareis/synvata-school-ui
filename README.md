@@ -1,4 +1,4 @@
-# SynvataSchoolUi
+# SYNVATA-SCHOOL-UI
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
 
@@ -24,3 +24,5 @@ How show students of one class
 
 Delete registers
 ![Delete registers](./giff/delete_users_and_courses.gif)
+
+[SYNVATA-SCHOOL-API](https://github.com/adrianosilvareis/synvata-school-api)
