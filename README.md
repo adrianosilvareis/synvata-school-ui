@@ -6,22 +6,21 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Usability
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+How create and update courses
+![Create and Update Course](./giff/create_and_update_course.gif)
 
-## Running end-to-end tests
+How create and update students
+![Create and Update students](./giff/create_and_update_students.gif)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+How show students of one class
+![show students](./giff/show_students.gif)
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Delete registers
+![Delete registers](./giff/delete_users_and_courses.gif)
